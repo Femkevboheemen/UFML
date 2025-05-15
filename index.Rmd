@@ -2,7 +2,10 @@
 title: "UFML Thesis"
 author: "Femke van Boheemen"
 date: "2025-05-15"
-output: html_document
+output: 
+  flexdashboard::flex_dashboard:
+    storyboard: true
+    theme: plotly
 ---
 
 ```{r setup, include=FALSE}
@@ -27,4 +30,3 @@ You can also embed plots, for example:
 plot(pressure)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
