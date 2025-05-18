@@ -4,33 +4,75 @@ author: "Femke van Boheemen"
 date: "2025-05-15"
 output: 
   flexdashboard::flex_dashboard:
-    orientation: columns
-    vertical_layout: fill
     storyboard: true
-    theme: flatly
-    css: pink.css
-    number_sections: true
+    theme: yeti
+    self_contained: false
+    vertical_layout: fill
 ---
 
+<style>
+.sbframe_commentary {
+  width: 400px;
+}
+</style>
+
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+library(readxl)
+library(dplyr)
+library(ggplot2)
+library(plotly)
+data_clean <- read_excel("UFML - 14 mei.xlsx", sheet = 2, skip = 1)
+data_filtered <- data_clean %>% 
+  filter(!is.na(Q24))
 ```
 
-### R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+### UFML 1 Comparison interactive
 
-```{r cars}
-summary(cars)
+
+```{r interactive-violin}
+
+a <- ggplot(data_filtered, aes(x = factor(Q24), y = Identiteit_socialeverbinding, fill = factor(Q24))) + 
+  geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
+  theme_minimal() + 
+  labs(title = "UFML 1 Identity and Social Bonding", 
+       x = "", 
+       y = "Frequency of use (1 = Never, 5 = Very often)", 
+       fill = "Group") + 
+  scale_x_discrete(labels = c("1" = "Student", "2" = "Employed")) + 
+  scale_fill_manual(values = c("1" = "skyblue", "2" = "orange")) + 
+  theme(legend.position = "none") + 
+  geom_boxplot(width = 0.1, color = "black", outlier.shape = NA, position = position_dodge (width = 0.9)) + 
+  scale_y_continuous(limits = c(1, 5), expand = expansion(mult = c(0, 0.05))) + 
+  stat_summary(fun = mean, geom = "point", shape = 23, size = 2, fill = "red")
+
+ggplotly(a)
+```
+***
+uitleg hihi
+
+### UFML 2 Comparison interactive
+
+```{r interactive-violin-2}
+
+b <- ggplot(data_filtered, aes(x = factor(Q24), y = Emotieregulatie, fill = factor(Q24))) + 
+  geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
+  theme_minimal() + 
+  labs(title = "UFML 2 Emotion Regulation", 
+       x = "", 
+       y = "Frequency of use (1 = Never, 5 = Very often)", 
+       fill = "Group") + 
+  scale_x_discrete(labels = c("1" = "Student", "2" = "Employed")) + 
+  scale_fill_manual(values = c("1" = "skyblue", "2" = "orange")) + 
+  theme(legend.position = "none") + 
+  geom_boxplot(width = 0.1, color = "black", outlier.shape = NA, position = position_dodge (width = 0.9)) + 
+  scale_y_continuous(limits = c(1, 5), expand = expansion(mult = c(0, 0.05))) + 
+  stat_summary(fun = mean, geom = "point", shape = 23, size = 2, fill = "red")
+
+ggplotly(b)
 ```
 
-## Including Plots
+***
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
+lol uitleg
