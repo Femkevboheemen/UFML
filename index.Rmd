@@ -24,6 +24,7 @@ library(plotly)
 data_clean <- read_excel("UFML - 14 mei.xlsx", sheet = 2, skip = 1)
 data_filtered <- data_clean %>% 
   filter(!is.na(Q24))
+
 ```
 
 
@@ -31,7 +32,7 @@ data_filtered <- data_clean %>%
 ### UFML 1 Comparison interactive
 
 
-```{r interactive-violin}
+```{r interactive-violin-a}
 
 a <- ggplot(data_filtered, aes(x = factor(Q24), y = Identiteit_socialeverbinding, fill = factor(Q24))) + 
   geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
@@ -54,7 +55,7 @@ uitleg hihi
 
 ### UFML 2 Comparison interactive
 
-```{r interactive-violin-2}
+```{r interactive-violin-b}
 
 b <- ggplot(data_filtered, aes(x = factor(Q24), y = Emotieregulatie, fill = factor(Q24))) + 
   geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
@@ -76,3 +77,423 @@ ggplotly(b)
 ***
 
 lol uitleg
+
+### UFML 3 Comparison interactive
+
+
+```{r interactive-violin-c}
+
+c <- ggplot(data_filtered, aes(x = factor(Q24), y = Focus_concentratie, fill = factor(Q24))) + 
+  geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
+  theme_minimal() + 
+  labs(title = "UFML 3 Focus and Concentration", 
+       x = "", 
+       y = "Frequency of use (1 = Never, 5 = Very often)", 
+       fill = "Group") + 
+  scale_x_discrete(labels = c("1" = "Student", "2" = "Employed")) + 
+  scale_fill_manual(values = c("1" = "skyblue", "2" = "orange")) + 
+  theme(legend.position = "none") + 
+  geom_boxplot(width = 0.1, color = "black", outlier.shape = NA, position = position_dodge (width = 0.9)) + 
+  scale_y_continuous(limits = c(1, 5), expand = expansion(mult = c(0, 0.05))) + 
+  stat_summary(fun = mean, geom = "point", shape = 23, size = 2, fill = "red")
+
+ggplotly(c)
+```
+***
+uitleg yuhyuh
+
+### UFML 4 Comparison interactive
+
+
+```{r interactive-violin-d}
+
+d <- ggplot(data_filtered, aes(x = factor(Q24), y = Achtergrond_gezelschap, fill = factor(Q24))) + 
+  geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
+  theme_minimal() + 
+  labs(title = "UFML 4 Background and Company", 
+       x = "", 
+       y = "Frequency of use (1 = Never, 5 = Very often)", 
+       fill = "Group") + 
+  scale_x_discrete(labels = c("1" = "Student", "2" = "Employed")) + 
+  scale_fill_manual(values = c("1" = "skyblue", "2" = "orange")) + 
+  theme(legend.position = "none") + 
+  geom_boxplot(width = 0.1, color = "black", outlier.shape = NA, position = position_dodge (width = 0.9)) + 
+  scale_y_continuous(limits = c(1, 5), expand = expansion(mult = c(0, 0.05))) + 
+  stat_summary(fun = mean, geom = "point", shape = 23, size = 2, fill = "red")
+
+ggplotly(d)
+```
+***
+uitleg hihi
+
+### UFML 5 Comparison interactive
+
+
+```{r interactive-violin-e}
+
+e <- ggplot(data_filtered, aes(x = factor(Q24), y = Fysiologischeopwinding, fill = factor(Q24))) + 
+  geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
+  theme_minimal() + 
+  labs(title = "UFML 5 Fysiological Arousal", 
+       x = "", 
+       y = "Frequency of use (1 = Never, 5 = Very often)", 
+       fill = "Group") + 
+  scale_x_discrete(labels = c("1" = "Student", "2" = "Employed")) + 
+  scale_fill_manual(values = c("1" = "skyblue", "2" = "orange")) + 
+  theme(legend.position = "none") + 
+  geom_boxplot(width = 0.1, color = "black", outlier.shape = NA, position = position_dodge (width = 0.9)) + 
+  scale_y_continuous(limits = c(1, 5), expand = expansion(mult = c(0, 0.05))) + 
+  stat_summary(fun = mean, geom = "point", shape = 23, size = 2, fill = "red")
+
+ggplotly(e)
+```
+***
+uitleg hihi
+
+### SPWB 1 Comparison interactive
+
+
+```{r interactive-violin-f}
+
+f <- ggplot(data_filtered, aes(x = factor(Q24), y = Autonomie, fill = factor(Q24))) + 
+  geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
+  theme_minimal() + 
+  labs(title = "SPWB 1 Autonomy", 
+       x = "", 
+       y = "Level of agreement (1 = Strongly disagree, 6 = Strongly agree)", 
+       fill = "Group") + 
+  scale_x_discrete(labels = c("1" = "Student", "2" = "Employed")) + 
+  scale_fill_manual(values = c("1" = "skyblue", "2" = "orange")) + 
+  theme(legend.position = "none") + 
+  geom_boxplot(width = 0.1, color = "black", outlier.shape = NA, position = position_dodge (width = 0.9)) + 
+  scale_y_continuous(limits = c(1, 6), expand = expansion(mult = c(0, 0.05))) + 
+  stat_summary(fun = mean, geom = "point", shape = 23, size = 2, fill = "red")
+
+ggplotly(f)
+```
+***
+uitleg hihi
+
+### SPWB 2 Comparison interactive
+
+
+```{r interactive-violin-g}
+
+g <- ggplot(data_filtered, aes(x = factor(Q24), y = Omgevingsbeheersing, fill = factor(Q24))) + 
+  geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
+  theme_minimal() + 
+  labs(title = "SPWB 2 Environmental management", 
+       x = "", 
+       y = "Level of agreement (1 = Strongly disagree, 6 = Strongly agree)", 
+       fill = "Group") + 
+  scale_x_discrete(labels = c("1" = "Student", "2" = "Employed")) + 
+  scale_fill_manual(values = c("1" = "skyblue", "2" = "orange")) + 
+  theme(legend.position = "none") + 
+  geom_boxplot(width = 0.1, color = "black", outlier.shape = NA, position = position_dodge (width = 0.9)) + 
+  scale_y_continuous(limits = c(1, 6), expand = expansion(mult = c(0, 0.05))) + 
+  stat_summary(fun = mean, geom = "point", shape = 23, size = 2, fill = "red")
+
+ggplotly(g)
+```
+***
+uitleg hihi
+
+### SPWB 4 Comparison interactive
+
+
+```{r interactive-violin-h}
+
+h <- ggplot(data_filtered, aes(x = factor(Q24), y = `Positieve relaties`, fill = factor(Q24))) + 
+  geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
+  theme_minimal() + 
+  labs(title = "SPWB 4 Positive relations", 
+       x = "", 
+       y = "Level of agreement (1 = Strongly disagree, 6 = Strongly agree)", 
+       fill = "Group") + 
+  scale_x_discrete(labels = c("1" = "Student", "2" = "Employed")) + 
+  scale_fill_manual(values = c("1" = "skyblue", "2" = "orange")) + 
+  theme(legend.position = "none") + 
+  geom_boxplot(width = 0.1, color = "black", outlier.shape = NA, position = position_dodge (width = 0.9)) + 
+  scale_y_continuous(limits = c(1, 6), expand = expansion(mult = c(0, 0.05))) + 
+  stat_summary(fun = mean, geom = "point", shape = 23, size = 2, fill = "red")
+
+ggplotly(h)
+```
+***
+uitleg hihi
+
+### SPWB 4 Comparison interactive
+
+
+```{r interactive-violin-i}
+
+i <- ggplot(data_filtered, aes(x = factor(Q24), y = `Persoonlijke groei`, fill = factor(Q24))) + 
+  geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
+  theme_minimal() + 
+  labs(title = "SPWB 3 Personal Growth", 
+       x = "", 
+       y = "Level of agreement (1 = Strongly disagree, 6 = Strongly agree)", 
+       fill = "Group") + 
+  scale_x_discrete(labels = c("1" = "Student", "2" = "Employed")) + 
+  scale_fill_manual(values = c("1" = "skyblue", "2" = "orange")) + 
+  theme(legend.position = "none") + 
+  geom_boxplot(width = 0.1, color = "black", outlier.shape = NA, position = position_dodge (width = 0.9)) + 
+  scale_y_continuous(limits = c(1, 6), expand = expansion(mult = c(0, 0.05))) + 
+  stat_summary(fun = mean, geom = "point", shape = 23, size = 2, fill = "red")
+
+ggplotly(i)
+```
+***
+uitleg hihi
+
+### SPWB 5 Comparison interactive
+
+
+```{r interactive-violin-j}
+
+j <- ggplot(data_filtered, aes(x = factor(Q24), y = `Doel in het leven`, fill = factor(Q24))) + 
+  geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
+  theme_minimal() + 
+  labs(title = "SPWB 5 Goal in Life", 
+       x = "", 
+       y = "Level of agreement (1 = Strongly disagree, 6 = Strongly agree)", 
+       fill = "Group") + 
+  scale_x_discrete(labels = c("1" = "Student", "2" = "Employed")) + 
+  scale_fill_manual(values = c("1" = "skyblue", "2" = "orange")) + 
+  theme(legend.position = "none") + 
+  geom_boxplot(width = 0.1, color = "black", outlier.shape = NA, position = position_dodge (width = 0.9)) + 
+  scale_y_continuous(limits = c(1, 6), expand = expansion(mult = c(0, 0.05))) + 
+  stat_summary(fun = mean, geom = "point", shape = 23, size = 2, fill = "red")
+
+ggplotly(j)
+```
+***
+uitleg hihi
+
+### SPWB 6 Comparison interactive
+
+
+```{r interactive-violin-k}
+
+k <- ggplot(data_filtered, aes(x = factor(Q24), y = `Zelfacceptatie`, fill = factor(Q24))) + 
+  geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
+  theme_minimal() + 
+  labs(title = "SPWB 6 Self Acceptance", 
+       x = "", 
+       y = "Level of agreement (1 = Strongly disagree, 6 = Strongly agree)", 
+       fill = "Group") + 
+  scale_x_discrete(labels = c("1" = "Student", "2" = "Employed")) + 
+  scale_fill_manual(values = c("1" = "skyblue", "2" = "orange")) + 
+  theme(legend.position = "none") + 
+  geom_boxplot(width = 0.1, color = "black", outlier.shape = NA, position = position_dodge (width = 0.9)) + 
+  scale_y_continuous(limits = c(1, 6), expand = expansion(mult = c(0, 0.05))) + 
+  stat_summary(fun = mean, geom = "point", shape = 23, size = 2, fill = "red")
+
+ggplotly(k)
+```
+***
+uitleg hihi
+
+### UFML 1 vs SPWB 1 Comparison interactive
+
+
+```{r interactive-correlation-l}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+l <- ggplot(data_filtered, aes(x = Autonomie, y = Identiteit_socialeverbinding, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
+  labs(
+    title = "Relation between Autonomy and Identity/Social connection per group",
+    x = "Autonomy\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Identity and Social connection\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(l)
+
+```
+***
+uitleg hihi
+
+### UFML 1 vs SPWB 2 Comparison interactive
+
+
+```{r interactive-correlation-m}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+m <- ggplot(data_filtered, aes(x = Autonomie, y = Omgevingsbeheersing, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:6, limits = c(1, 6)) +
+  labs(
+    title = "Relation between Environmental Management and Identity/Social connection per group",
+    x = "Environmental Management\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Identity and Social connection\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(m)
+
+```
+***
+uitleg hihi
+
+### UFML 1 vs SPWB 3 Comparison interactive
+
+
+```{r interactive-correlation-n}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+n <- ggplot(data_filtered, aes(x = Autonomie, y = `Persoonlijke groei`, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:6, limits = c(1, 6)) +
+  labs(
+    title = "Relation between Personal Growth and Identity/Social connection per group",
+    x = "Personal Growth\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Identity and Social connection\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(n)
+
+```
+***
+uitleg hihi
+
+### UFML 1 vs SPWB 4 Comparison interactive
+
+
+```{r interactive-correlation-o}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+o <- ggplot(data_filtered, aes(x = Autonomie, y = `Positieve relaties`, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:6, limits = c(1, 6)) +
+  labs(
+    title = "Relation between Positive Relations and Identity/Social connection per group",
+    x = "Positive Relations\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Identity and Social connection\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(o)
+
+```
+***
+uitleg hihi
+
+### UFML 1 vs SPWB 5 Comparison interactive
+
+
+```{r interactive-correlation-p}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+p <- ggplot(data_filtered, aes(x = Autonomie, y = `Doel in het leven`, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:6, limits = c(1, 6)) +
+  labs(
+    title = "Relation between Goal in Life and Identity/Social connection per group",
+    x = "Goal in Life\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Identity and Social connection\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(p)
+
+```
+***
+uitleg hihi
+
+### UFML 1 vs SPWB 6 Comparison interactive
+
+
+```{r interactive-correlation-q}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+q <- ggplot(data_filtered, aes(x = Autonomie, y = `Zelfacceptatie`, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:6, limits = c(1, 6)) +
+  labs(
+    title = "Relation between Self Acceptance and Identity/Social connection per group",
+    x = "Self Acceptance\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Identity and Social connection\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(q)
+
+```
+***
+uitleg hihi
