@@ -340,7 +340,7 @@ data_filtered$Q24 <- factor(data_filtered$Q24,
                             levels = c(1, 2), 
                             labels = c("Student", "Employed"))
 
-m <- ggplot(data_filtered, aes(x = Autonomie, y = Omgevingsbeheersing, color = Q24)) +
+m <- ggplot(data_filtered, aes(x = Omgevingsbeheersing, y = Identiteit_socialeverbinding, color = Q24)) +
   geom_point(alpha = 0.7) +
   geom_smooth(method = "lm", se = FALSE) +
   scale_color_manual(
@@ -348,7 +348,7 @@ m <- ggplot(data_filtered, aes(x = Autonomie, y = Omgevingsbeheersing, color = Q
     name = "Group"
   ) +
   scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
-  scale_y_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
   labs(
     title = "Relation between Environmental Management and Identity/Social connection per group",
     x = "Environmental Management\n(1 = Strongly disagree, 6 = Strongly agree)",
@@ -374,7 +374,7 @@ data_filtered$Q24 <- factor(data_filtered$Q24,
                             levels = c(1, 2), 
                             labels = c("Student", "Employed"))
 
-n <- ggplot(data_filtered, aes(x = Autonomie, y = `Persoonlijke groei`, color = Q24)) +
+n <- ggplot(data_filtered, aes(x = `Persoonlijke groei`, y = Identiteit_socialeverbinding, color = Q24)) +
   geom_point(alpha = 0.7) +
   geom_smooth(method = "lm", se = FALSE) +
   scale_color_manual(
@@ -382,7 +382,7 @@ n <- ggplot(data_filtered, aes(x = Autonomie, y = `Persoonlijke groei`, color = 
     name = "Group"
   ) +
   scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
-  scale_y_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
   labs(
     title = "Relation between Personal Growth and Identity/Social connection per group",
     x = "Personal Growth\n(1 = Strongly disagree, 6 = Strongly agree)",
@@ -408,7 +408,7 @@ data_filtered$Q24 <- factor(data_filtered$Q24,
                             levels = c(1, 2), 
                             labels = c("Student", "Employed"))
 
-o <- ggplot(data_filtered, aes(x = Autonomie, y = `Positieve relaties`, color = Q24)) +
+o <- ggplot(data_filtered, aes(x = `Positieve relaties`, y = Identiteit_socialeverbinding, color = Q24)) +
   geom_point(alpha = 0.7) +
   geom_smooth(method = "lm", se = FALSE) +
   scale_color_manual(
@@ -416,7 +416,7 @@ o <- ggplot(data_filtered, aes(x = Autonomie, y = `Positieve relaties`, color = 
     name = "Group"
   ) +
   scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
-  scale_y_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
   labs(
     title = "Relation between Positive Relations and Identity/Social connection per group",
     x = "Positive Relations\n(1 = Strongly disagree, 6 = Strongly agree)",
@@ -442,7 +442,7 @@ data_filtered$Q24 <- factor(data_filtered$Q24,
                             levels = c(1, 2), 
                             labels = c("Student", "Employed"))
 
-p <- ggplot(data_filtered, aes(x = Autonomie, y = `Doel in het leven`, color = Q24)) +
+p <- ggplot(data_filtered, aes(x = `Doel in het leven`, y = Identiteit_socialeverbinding, color = Q24)) +
   geom_point(alpha = 0.7) +
   geom_smooth(method = "lm", se = FALSE) +
   scale_color_manual(
@@ -450,7 +450,7 @@ p <- ggplot(data_filtered, aes(x = Autonomie, y = `Doel in het leven`, color = Q
     name = "Group"
   ) +
   scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
-  scale_y_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
   labs(
     title = "Relation between Goal in Life and Identity/Social connection per group",
     x = "Goal in Life\n(1 = Strongly disagree, 6 = Strongly agree)",
@@ -476,7 +476,7 @@ data_filtered$Q24 <- factor(data_filtered$Q24,
                             levels = c(1, 2), 
                             labels = c("Student", "Employed"))
 
-q <- ggplot(data_filtered, aes(x = Autonomie, y = `Zelfacceptatie`, color = Q24)) +
+q <- ggplot(data_filtered, aes(x = Zelfacceptatie, y = Identiteit_socialeverbinding, color = Q24)) +
   geom_point(alpha = 0.7) +
   geom_smooth(method = "lm", se = FALSE) +
   scale_color_manual(
@@ -484,7 +484,7 @@ q <- ggplot(data_filtered, aes(x = Autonomie, y = `Zelfacceptatie`, color = Q24)
     name = "Group"
   ) +
   scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
-  scale_y_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
   labs(
     title = "Relation between Self Acceptance and Identity/Social connection per group",
     x = "Self Acceptance\n(1 = Strongly disagree, 6 = Strongly agree)",
@@ -493,6 +493,415 @@ q <- ggplot(data_filtered, aes(x = Autonomie, y = `Zelfacceptatie`, color = Q24)
   theme_minimal()
 
 ggplotly(q)
+
+```
+***
+uitleg hihi
+
+
+### UFML 2 vs SPWB 1 Comparison interactive
+
+
+```{r interactive-correlation-r}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+r <- ggplot(data_filtered, aes(x = Autonomie, y = Emotieregulatie, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
+  labs(
+    title = "Relation between Autonomy and Emotion Regulation per group",
+    x = "Autonomy\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Emotion Regulation\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(r)
+
+```
+***
+uitleg hihi
+
+### UFML 2 vs SPWB 2 Comparison interactive
+
+
+```{r interactive-correlation-s}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+s <- ggplot(data_filtered, aes(x = Omgevingsbeheersing, y = Emotieregulatie, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
+  labs(
+    title = "Relation between Environmental Management and Emotion Regulation per group",
+    x = "Environmental Management\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Emotion Regulation\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(s)
+
+```
+***
+uitleg hihi
+
+### UFML 2 vs SPWB 3 Comparison interactive
+
+
+```{r interactive-correlation-t}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+t <- ggplot(data_filtered, aes(x = `Persoonlijke groei`, y = Emotieregulatie, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
+  labs(
+    title = "Relation between Personal Growth and Emotion Regulation per group",
+    x = "Personal Growth\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Emotion Regulation\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(t)
+
+```
+***
+uitleg hihi
+
+### UFML 2 vs SPWB 4 Comparison interactive
+
+
+```{r interactive-correlation-u}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+u <- ggplot(data_filtered, aes(x = `Positieve relaties`, y = Emotieregulatie, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
+  labs(
+    title = "Relation between Positive Relations and Emotion Regulation per group",
+    x = "Positive Relations\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Emotion Regulation\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(u)
+
+```
+***
+uitleg hihi
+
+### UFML 2 vs SPWB 5 Comparison interactive
+
+
+```{r interactive-correlation-v}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+v <- ggplot(data_filtered, aes(x = `Doel in het leven`, y = Emotieregulatie, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
+  labs(
+    title = "Relation between Goal in Life and Emotion Regulation per group",
+    x = "Goal in Life\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Emotion Regulation\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(v)
+
+```
+***
+uitleg hihi
+
+### UFML 2 vs SPWB 6 Comparison interactive
+
+
+```{r interactive-correlation-w}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+w <- ggplot(data_filtered, aes(x = Zelfacceptatie, y = Emotieregulatie, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
+  labs(
+    title = "Relation between Self Acceptance and Emotion Regulation per group",
+    x = "Self Acceptance\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Emotion Regulation\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(w)
+
+```
+***
+uitleg hihi
+
+### UFML 3 vs SPWB 1 Comparison interactive
+
+
+```{r interactive-correlation-x}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+x <- ggplot(data_filtered, aes(x = Autonomie, y = Focus_concentratie, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
+  labs(
+    title = "Relation between Autonomy and Focus/Concentration per group",
+    x = "Autonomy\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Focus/Concentration\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(x)
+
+```
+***
+uitleg hihi
+
+### UFML 3 vs SPWB 2 Comparison interactive
+
+
+```{r interactive-correlation-y}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+y <- ggplot(data_filtered, aes(x = Omgevingsbeheersing, y = Focus_concentratie, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
+  labs(
+    title = "Relation between Environmental Management and Focus/Concentration per group",
+    x = "Environmental Management\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Focus and Concentration\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(y)
+
+```
+***
+uitleg hihi
+
+### UFML 3 vs SPWB 3 Comparison interactive
+
+
+```{r interactive-correlation-z}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+z <- ggplot(data_filtered, aes(x = `Persoonlijke groei`, y = Focus_concentratie, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
+  labs(
+    title = "Relation between Personal Growth and Focus/Concentration per group",
+    x = "Personal Growth\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Focus and Concentration\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(z)
+
+```
+***
+uitleg hihi
+
+### UFML 3 vs SPWB 4 Comparison interactive
+
+
+```{r interactive-correlation-aa}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+aa <- ggplot(data_filtered, aes(x = `Positieve relaties`, y = Focus_concentratie, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
+  labs(
+    title = "Relation between Positive Relations and Focus/Concentration per group",
+    x = "Positive Relations\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Focus and Concentration\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(aa)
+
+```
+***
+uitleg hihi
+
+### UFML 3 vs SPWB 5 Comparison interactive
+
+
+```{r interactive-correlation-ab}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+ab <- ggplot(data_filtered, aes(x = `Doel in het leven`, y = Focus_concentratie, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
+  labs(
+    title = "Relation between Goal in Life and Focus/Concentration per group",
+    x = "Goal in Life\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Focus and Concentration\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(ab)
+
+```
+***
+uitleg hihi
+
+### UFML 3 vs SPWB 6 Comparison interactive
+
+
+```{r interactive-correlation-ac}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+ac <- ggplot(data_filtered, aes(x = Zelfacceptatie, y = Focus_concentratie, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
+  labs(
+    title = "Relation between Self Acceptance and Focus/Concentration per group",
+    x = "Self Acceptance\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Focus and Concentration\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(ac)
 
 ```
 ***
