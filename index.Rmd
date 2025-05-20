@@ -906,3 +906,411 @@ ggplotly(ac)
 ```
 ***
 uitleg hihi
+
+### UFML 4 vs SPWB 1 Comparison interactive
+
+
+```{r interactive-correlation-ad}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+ad <- ggplot(data_filtered, aes(x = Autonomie, y = Achtergrond_gezelschap, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
+  labs(
+    title = "Relation between Autonomy and Background/Company per group",
+    x = "Autonomy\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Achtergrond and Company\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(ad)
+
+```
+***
+uitleg hihi
+
+### UFML 4 vs SPWB 2 Comparison interactive
+
+
+```{r interactive-correlation-ae}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+ae <- ggplot(data_filtered, aes(x = Omgevingsbeheersing, y = Achtergrond_gezelschap, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
+  labs(
+    title = "Relation between Environmental Management and Background/Company per group",
+    x = "Environmental Management\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Bachground and Company\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(ae)
+
+```
+***
+uitleg hihi
+
+### UFML 4 vs SPWB 3 Comparison interactive
+
+
+```{r interactive-correlation-af}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+af <- ggplot(data_filtered, aes(x = `Persoonlijke groei`, y = Achtergrond_gezelschap, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
+  labs(
+    title = "Relation between Personal Growth and Background/Company per group",
+    x = "Personal Growth\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Background and Company\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(af)
+
+```
+***
+uitleg hihi
+
+### UFML 4 vs SPWB 4 Comparison interactive
+
+
+```{r interactive-correlation-ag}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+ag <- ggplot(data_filtered, aes(x = `Positieve relaties`, y = Achtergrond_gezelschap, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
+  labs(
+    title = "Relation between Positive Relations and Background/Company per group",
+    x = "Positive Relations\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Background and Company\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(ag)
+
+```
+***
+uitleg hihi
+
+### UFML 4 vs SPWB 5 Comparison interactive
+
+
+```{r interactive-correlation-ah}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+ah <- ggplot(data_filtered, aes(x = `Doel in het leven`, y = Achtergrond_gezelschap, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
+  labs(
+    title = "Relation between Goal in Life and Background/Company per group",
+    x = "Goal in Life\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Background and Company\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(ah)
+
+```
+***
+uitleg hihi
+
+### UFML 4 vs SPWB 6 Comparison interactive
+
+
+```{r interactive-correlation-ai}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+ai <- ggplot(data_filtered, aes(x = Zelfacceptatie, y = Achtergrond_gezelschap, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
+  labs(
+    title = "Relation between Self Acceptance and Background/Company per group",
+    x = "Self Acceptance\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Background and Company\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(ag)
+
+```
+***
+uitleg hihi
+
+### UFML 5 vs SPWB 1 Comparison interactive
+
+
+```{r interactive-correlation-aj}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+aj <- ggplot(data_filtered, aes(x = Autonomie, y = Fysiologischeopwinding, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
+  labs(
+    title = "Relation between Autonomy and Fysiological Arousal per group",
+    x = "Autonomy\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Fysiological Arousal\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(aj)
+
+```
+***
+uitleg hihi
+
+### UFML 5 vs SPWB 2 Comparison interactive
+
+
+```{r interactive-correlation-ak}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+ak <- ggplot(data_filtered, aes(x = Omgevingsbeheersing, y = Fysiologischeopwinding, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
+  labs(
+    title = "Relation between Environmental Management and Fysiological Arousal per group",
+    x = "Environmental Management\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Fysiological Arousal\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(ak)
+
+```
+***
+uitleg hihi
+
+### UFML 5 vs SPWB 3 Comparison interactive
+
+
+```{r interactive-correlation-al}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+al <- ggplot(data_filtered, aes(x = `Persoonlijke groei`, y = Fysiologischeopwinding, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
+  labs(
+    title = "Relation between Personal Growth and Fysiological Arousal per group",
+    x = "Personal Growth\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Fysiological Arousal\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(al)
+
+```
+***
+uitleg hihi
+
+### UFML 5 vs SPWB 4 Comparison interactive
+
+
+```{r interactive-correlation-am}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+am <- ggplot(data_filtered, aes(x = `Positieve relaties`, y = Fysiologischeopwinding, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
+  labs(
+    title = "Relation between Positive Relations and Fysiological Arousal per group",
+    x = "Positive Relations\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Fysiological Arousal\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(am)
+
+```
+***
+uitleg hihi
+
+### UFML 5 vs SPWB 5 Comparison interactive
+
+
+```{r interactive-correlation-an}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+an <- ggplot(data_filtered, aes(x = `Doel in het leven`, y = Fysiologischeopwinding, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
+  labs(
+    title = "Relation between Goal in Life and Fysiological Arousal per group",
+    x = "Goal in Life\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Fysiological Arousal\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(an)
+
+```
+***
+uitleg hihi
+
+### UFML 5 vs SPWB 6 Comparison interactive
+
+
+```{r interactive-correlation-ao}
+
+data_filtered <- data_clean %>%
+  filter(Q24 %in% c(1, 2))
+
+data_filtered$Q24 <- factor(data_filtered$Q24, 
+                            levels = c(1, 2), 
+                            labels = c("Student", "Employed"))
+
+ao <- ggplot(data_filtered, aes(x = Zelfacceptatie, y = Fysiologischeopwinding, color = Q24)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(
+    values = c("Student" = "skyblue", "Employed" = "orange"),
+    name = "Group"
+  ) +
+  scale_x_continuous(breaks = 1:6, limits = c(1, 6)) +
+  scale_y_continuous(breaks = 1:5, limits = c(1, 5)) +
+  labs(
+    title = "Relation between Self Acceptance and Fysiological Arousal per group",
+    x = "Self Acceptance\n(1 = Strongly disagree, 6 = Strongly agree)",
+    y = "Fysiological Arousal\n(1 = Never, 5 = Very often)"
+  ) +
+  theme_minimal()
+
+ggplotly(ao)
+
+```
+***
+uitleg hihi
