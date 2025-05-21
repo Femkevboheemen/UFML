@@ -21,6 +21,7 @@ library(readxl)
 library(dplyr)
 library(ggplot2)
 library(plotly)
+library(ggpubr)
 data_clean <- read_excel("UFML - 14 mei.xlsx", sheet = 2, skip = 1)
 data_filtered <- data_clean %>% 
   filter(!is.na(Q24))
@@ -31,12 +32,17 @@ data_filtered <- data_clean %>%
 
 ### UFML 1 Comparison interactive
 
+```{r utest-a, echo=FALSE, results='hide'}
+
+wilcox.test(Identiteit_socialeverbinding ~ Q24, data = data_filtered)
+```
 
 ```{r interactive-violin-a}
 
 a <- ggplot(data_filtered, aes(x = factor(Q24), y = Identiteit_socialeverbinding, fill = factor(Q24))) + 
   geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
-  theme_minimal() + 
+  theme_minimal() +
+  stat_compare_means(method = "wilcox.test", label.y = 5) + 
   labs(title = "UFML 1 Identity and Social Bonding", 
        x = "", 
        y = "Frequency of use (1 = Never, 5 = Very often)", 
@@ -51,15 +57,30 @@ a <- ggplot(data_filtered, aes(x = factor(Q24), y = Identiteit_socialeverbinding
 ggplotly(a)
 ```
 ***
-uitleg hihi
+**Expectation**  
+Students use music more for its functions in Identity and Social Bonding than employed individuals. (students have more social events and are more prone to having to meet new groups/environments)
+
+**Interpretation**  
+- Students use music more frequently for identity and social bonding than employed individuals.  
+- Students show a higher median and more responses at the upper end (3–4).  
+- Employed individuals have a lower median and a wider spread toward lower values (1–2).  
+- The P-value = 0.041, indicating a statistically significant difference.  
+
+Students rely more on music for identity and social bonding, maybe because of musics role in self-exploration and social connection during young adulthood.
 
 ### UFML 2 Comparison interactive
+
+```{r utest-b, echo=FALSE, results='hide'}
+
+wilcox.test(Emotieregulatie ~ Q24, data = data_filtered)
+```
 
 ```{r interactive-violin-b}
 
 b <- ggplot(data_filtered, aes(x = factor(Q24), y = Emotieregulatie, fill = factor(Q24))) + 
   geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
-  theme_minimal() + 
+  theme_minimal() +
+  stat_compare_means(method = "wilcox.test", label.y = 5) + 
   labs(title = "UFML 2 Emotion Regulation", 
        x = "", 
        y = "Frequency of use (1 = Never, 5 = Very often)", 
@@ -76,16 +97,30 @@ ggplotly(b)
 
 ***
 
-lol uitleg
+**Expectation**  
+Students and employed individuals both frequently use music for its functions in Emotion regulation, but students use it more intensively (still figuring out how to deal with (new) emotions)  
+
+**Interpretation**  
+- Both students and employed individuals use music frequently for emotion regulation (ratings mostly between 3–4).  
+- Students show a slightly wider spread towards higher values (4–5), suggesting somewhat more intensive use.  
+- Medians and means are similar across groups.  
+- The p-value = 0.15, indicating no statistically significant difference.  
+
+While students may use music slightly more for emotion regulation, this difference is not statistically significant. The data suggests similar usage patterns across both groups.  
 
 ### UFML 3 Comparison interactive
 
+```{r utest-c, echo=FALSE, results='hide'}
+
+wilcox.test(Focus_concentratie ~ Q24, data = data_filtered)
+```
 
 ```{r interactive-violin-c}
 
 c <- ggplot(data_filtered, aes(x = factor(Q24), y = Focus_concentratie, fill = factor(Q24))) + 
   geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
-  theme_minimal() + 
+  theme_minimal() +
+  stat_compare_means(method = "wilcox.test", label.y = 5) + 
   labs(title = "UFML 3 Focus and Concentration", 
        x = "", 
        y = "Frequency of use (1 = Never, 5 = Very often)", 
@@ -100,16 +135,30 @@ c <- ggplot(data_filtered, aes(x = factor(Q24), y = Focus_concentratie, fill = f
 ggplotly(c)
 ```
 ***
-uitleg yuhyuh
+**Expectation**  
+Students use music more frequently for its functions in focus and concentration. (more opportunity to study with music)  
+
+**Interpretation**  
+- Students use music more frequently for focus and concentration than employed individuals.  
+- Students show a higher median and greater density at the top end (4–5).  
+- Employed individuals have a slightly lower median and a broader spread across the scale.  
+- The p-value = 0.023, indicating a statistically significant difference.  
+
+Students use music more to support focus and concentration, possibly reflecting their academic demands and structured study environments.
 
 ### UFML 4 Comparison interactive
 
+```{r utest-d, echo=FALSE, results='hide'}
+
+wilcox.test(Achtergrond_gezelschap ~ Q24, data = data_filtered)
+```
 
 ```{r interactive-violin-d}
 
 d <- ggplot(data_filtered, aes(x = factor(Q24), y = Achtergrond_gezelschap, fill = factor(Q24))) + 
   geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
-  theme_minimal() + 
+  theme_minimal() +
+  stat_compare_means(method = "wilcox.test", label.y = 5) + 
   labs(title = "UFML 4 Background and Company", 
        x = "", 
        y = "Frequency of use (1 = Never, 5 = Very often)", 
@@ -124,16 +173,30 @@ d <- ggplot(data_filtered, aes(x = factor(Q24), y = Achtergrond_gezelschap, fill
 ggplotly(d)
 ```
 ***
-uitleg hihi
+**Expectation**  
+Students use music more for background and accompaniment than employed individuals (studenten zijn eenzamer en hebben meer flexibiliteit in omgeving)  
+
+**Interpretation**  
+- Students appear to use music slightly more for background and company than employed individuals.  
+- Students have a higher median and more responses clustered around 4.  
+- Employed individuals show a broader spread and slightly lower median.  
+- The p-value = 0.078, indicating the difference is not statistically significant, but nearing significance.  
+
+There is a weak trend suggesting students may use music more for background and company, but the difference is not statistically confirmed. Usage patterns are relatively similar.
 
 ### UFML 5 Comparison interactive
 
+```{r utest-e, echo=FALSE, results='hide'}
+
+wilcox.test(Fysiologischeopwinding ~ Q24, data = data_filtered)
+```
 
 ```{r interactive-violin-e}
 
 e <- ggplot(data_filtered, aes(x = factor(Q24), y = Fysiologischeopwinding, fill = factor(Q24))) + 
   geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
-  theme_minimal() + 
+  theme_minimal() +
+  stat_compare_means(method = "wilcox.test", label.y = 5) + 
   labs(title = "UFML 5 Fysiological Arousal", 
        x = "", 
        y = "Frequency of use (1 = Never, 5 = Very often)", 
@@ -148,16 +211,31 @@ e <- ggplot(data_filtered, aes(x = factor(Q24), y = Fysiologischeopwinding, fill
 ggplotly(e)
 ```
 ***
-uitleg hihi
+**Expectation**  
+-	Students also use music more frequently for its functions in physiological arousal. (more motivation from music and more intense activities)  
+
+**Interpretation**  
+- Students and employed individuals show similar use of music for fysiological arousal.  
+- Students have slightly more density around the top end (4–5), but also a small cluster at the low end.  
+- Employed individuals have a slightly narrower distribution but similar central tendency.  
+- The p-value = 0.27, indicating no statistically significant difference.  
+
+Both groups use music similarly for physiological arousal. The data shows no meaningful difference in usage patterns.
+
 
 ### SPWB 1 Comparison interactive
 
+```{r utest-f, echo=FALSE, results='hide'}
+
+wilcox.test(Autonomie ~ Q24, data = data_filtered)
+```
 
 ```{r interactive-violin-f}
 
 f <- ggplot(data_filtered, aes(x = factor(Q24), y = Autonomie, fill = factor(Q24))) + 
   geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
-  theme_minimal() + 
+  theme_minimal() +
+  stat_compare_means(method = "wilcox.test", label.y = 6) + 
   labs(title = "SPWB 1 Autonomy", 
        x = "", 
        y = "Level of agreement (1 = Strongly disagree, 6 = Strongly agree)", 
@@ -172,16 +250,30 @@ f <- ggplot(data_filtered, aes(x = factor(Q24), y = Autonomie, fill = factor(Q24
 ggplotly(f)
 ```
 ***
-uitleg hihi
+**Expectation**  
+Employed individuals likely feel more autonomoy (more independence and daily control).  
+
+**Interpretation**  
+- Students and employed individuals report similar levels of autonomy.  
+- Both groups cluster around values 4 to 5, with nearly identical medians.  
+- Slightly more spread is visible in the student group, but central tendencies are close.  
+- The Wilcoxon p-value = 0.51, indicating no statistically significant difference.  
+
+There is no meaningful difference in perceived autonomy between students and employed individuals. Agreement levels are consistently high across both groups.  
 
 ### SPWB 2 Comparison interactive
 
+```{r utest-g, echo=FALSE, results='hide'}
+
+wilcox.test(Omgevingsbeheersing ~ Q24, data = data_filtered)
+```
 
 ```{r interactive-violin-g}
 
 g <- ggplot(data_filtered, aes(x = factor(Q24), y = Omgevingsbeheersing, fill = factor(Q24))) + 
   geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
-  theme_minimal() + 
+  theme_minimal() +
+  stat_compare_means(method = "wilcox.test", label.y = 6) + 
   labs(title = "SPWB 2 Environmental management", 
        x = "", 
        y = "Level of agreement (1 = Strongly disagree, 6 = Strongly agree)", 
@@ -196,40 +288,33 @@ g <- ggplot(data_filtered, aes(x = factor(Q24), y = Omgevingsbeheersing, fill = 
 ggplotly(g)
 ```
 ***
-uitleg hihi
+**Expectation**  
+Employed individuals are expected to score higher (more structure and control in daily environment).  
 
-### SPWB 4 Comparison interactive
+**Interpretation**  
+- Employed individuals report higher levels of environmental management than students.  
+- Employed individuals have a higher median and more responses clustered at the top (5–6).  
+- Students show a wider spread with more responses around 3–4.  
+- The p-value = 0.0074, indicating a statistically significant difference.  
+
+Employed individuals feel more capable of managing their surroundings, suggesting greater control over life situations.  
 
 
-```{r interactive-violin-h}
+### SPWB 3 Comparison interactive
 
-h <- ggplot(data_filtered, aes(x = factor(Q24), y = `Positieve relaties`, fill = factor(Q24))) + 
-  geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
-  theme_minimal() + 
-  labs(title = "SPWB 4 Positive relations", 
-       x = "", 
-       y = "Level of agreement (1 = Strongly disagree, 6 = Strongly agree)", 
-       fill = "Group") + 
-  scale_x_discrete(labels = c("1" = "Student", "2" = "Employed")) + 
-  scale_fill_manual(values = c("1" = "skyblue", "2" = "orange")) + 
-  theme(legend.position = "none") + 
-  geom_boxplot(width = 0.1, color = "black", outlier.shape = NA, position = position_dodge (width = 0.9)) + 
-  scale_y_continuous(limits = c(1, 6), expand = expansion(mult = c(0, 0.05))) + 
-  stat_summary(fun = mean, geom = "point", shape = 23, size = 2, fill = "red")
+```{r utest-i, echo=FALSE, results='hide'}
 
-ggplotly(h)
+wilcox.test(`Persoonlijke groei` ~ Q24, data = data_filtered)
 ```
-***
-uitleg hihi
-
-### SPWB 4 Comparison interactive
-
 
 ```{r interactive-violin-i}
 
+wilcox.test(`Persoonlijke groei` ~ Q24, data = data_filtered)
+
 i <- ggplot(data_filtered, aes(x = factor(Q24), y = `Persoonlijke groei`, fill = factor(Q24))) + 
   geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
-  theme_minimal() + 
+  theme_minimal() +
+  stat_compare_means(method = "wilcox.test", label.y = 6) + 
   labs(title = "SPWB 3 Personal Growth", 
        x = "", 
        y = "Level of agreement (1 = Strongly disagree, 6 = Strongly agree)", 
@@ -244,16 +329,73 @@ i <- ggplot(data_filtered, aes(x = factor(Q24), y = `Persoonlijke groei`, fill =
 ggplotly(i)
 ```
 ***
-uitleg hihi
+**Expectation**  
+Students may score slightly higher (in an active phase of learning and self-development).  
+
+**Interpretation**  
+- Students and employed individuals report similar levels of personal growth.  
+- Both groups cluster around 4 to 5, with very similar medians and means.  
+- The distributions show comparable spread and central tendency.  
+- The p-value = 0.49, indicating no statistically significant difference.  
+
+There is no meaningful difference in perceived personal growth between students and employed individuals. Both groups report fairly high levels.  
+
+### SPWB 4 Comparison interactive
+
+```{r utest-h, echo=FALSE, results='hide'}
+
+wilcox.test(`Positieve relaties` ~ Q24, data = data_filtered)
+```
+
+```{r interactive-violin-h}
+
+
+
+h <- ggplot(data_filtered, aes(x = factor(Q24), y = `Positieve relaties`, fill = factor(Q24))) + 
+  geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
+  theme_minimal() +
+  stat_compare_means(method = "wilcox.test", label.y = 6) + 
+  labs(title = "SPWB 4 Positive relations", 
+       x = "", 
+       y = "Level of agreement (1 = Strongly disagree, 6 = Strongly agree)", 
+       fill = "Group") + 
+  scale_x_discrete(labels = c("1" = "Student", "2" = "Employed")) + 
+  scale_fill_manual(values = c("1" = "skyblue", "2" = "orange")) + 
+  theme(legend.position = "none") + 
+  geom_boxplot(width = 0.1, color = "black", outlier.shape = NA, position = position_dodge (width = 0.9)) + 
+  scale_y_continuous(limits = c(1, 6), expand = expansion(mult = c(0, 0.05))) + 
+  stat_summary(fun = mean, geom = "point", shape = 23, size = 2, fill = "red")
+
+ggplotly(h)
+```
+***
+**Expectation**  
+Students may score slightly higher (more social opportunities and peer interaction).  
+
+**Interpretation**  
+- Students and employed individuals report similar levels of positive relations.  
+- Both groups cluster around 4 to 6, with similar medians and means.  
+- Students show slightly more responses at the top end (5–6).  
+- The p-value = 0.23, indicating no statistically significant difference.  
+
+Both groups report high levels of positive relationships, with no meaningful difference in perceived social connection.  
+
 
 ### SPWB 5 Comparison interactive
 
+```{r utest-j, echo=FALSE, results='hide'}
+
+wilcox.test(`Doel in het leven` ~ Q24, data = data_filtered)
+```
 
 ```{r interactive-violin-j}
 
+wilcox.test(`Doel in het leven` ~ Q24, data = data_filtered)
+
 j <- ggplot(data_filtered, aes(x = factor(Q24), y = `Doel in het leven`, fill = factor(Q24))) + 
   geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
-  theme_minimal() + 
+  theme_minimal() +
+  stat_compare_means(method = "wilcox.test", label.y = 6) + 
   labs(title = "SPWB 5 Goal in Life", 
        x = "", 
        y = "Level of agreement (1 = Strongly disagree, 6 = Strongly agree)", 
@@ -268,16 +410,32 @@ j <- ggplot(data_filtered, aes(x = factor(Q24), y = `Doel in het leven`, fill = 
 ggplotly(j)
 ```
 ***
-uitleg hihi
+**Expectation** 
+Students may score slightly higher (actively shaping future plans and ambitions).  
+
+**Interpretation**  
+- Students and employed individuals report similar levels of having a goal in life.  
+- Both groups cluster around 4 to 5, with students showing slightly more responses near the top.  
+- Medians and means are close, with modest variation in spread.  
+- The p-value = 0.12, indicating no statistically significant difference.  
+
+There is no significant difference in sense of life goals between students and employed individuals, though students may report slightly higher levels.  
+
+
 
 ### SPWB 6 Comparison interactive
 
+```{r utest-k, echo=FALSE, results='hide'}
+
+wilcox.test(Zelfacceptatie ~ Q24, data = data_filtered)
+```
 
 ```{r interactive-violin-k}
 
 k <- ggplot(data_filtered, aes(x = factor(Q24), y = `Zelfacceptatie`, fill = factor(Q24))) + 
   geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
-  theme_minimal() + 
+  theme_minimal() +
+  stat_compare_means(method = "wilcox.test", label.y = 6) + 
   labs(title = "SPWB 6 Self Acceptance", 
        x = "", 
        y = "Level of agreement (1 = Strongly disagree, 6 = Strongly agree)", 
@@ -292,7 +450,47 @@ k <- ggplot(data_filtered, aes(x = factor(Q24), y = `Zelfacceptatie`, fill = fac
 ggplotly(k)
 ```
 ***
-uitleg hihi
+**Expectation**  
+Employed individuals may score higher (more life experience and self-confidence).  
+
+**Interpretation**  
+- Employed individuals report higher self-acceptance than students.  
+- Employed individuals have a higher median and more responses clustered at the top (4–6).  
+- Students show a wider spread with more responses in the lower range (2–4).  
+- The p-value = 0.03, indicating a statistically significant difference.  
+
+Employed individuals feel more accepting of themselves, possibly reflecting greater life experience and stability.  
+
+### P-values according to Mann-Whitney-test
+
+![](C:/Users/femke/OneDrive - UvA/Jaar 3 muziekwetenschap/Scriptie/Rstudio/UFML/Plots/P_waarden.png)
+
+![](C:/Users/femke/OneDrive - UvA/Jaar 3 muziekwetenschap/Scriptie/Rstudio/UFML/Plots/correlatie_per_groep.png)
+![](C:/Users/femke/OneDrive - UvA/Jaar 3 muziekwetenschap/Scriptie/Rstudio/UFML/Plots/fisher_vergelijking.png)
+
+
+***
+**P-values in violin plots**  
+Of the five UFML subscales, two show a significant difference between students and workers: Identity/Social Connection (p = 0.041) and Focus/Concentration (p = 0.023). Within the SPWB scales, Environmental Control (p = 0.0074) and Self-acceptance (p = 0.03) were found to be significantly different between the groups. No statistically significant difference was found for the remaining scales.  
+
+**Within-group correlations**  
+Among students, several UFML subscales showed moderate to strong correlations with SPWB subscales. Notably:  
+
+Identity/Social Connection correlated with Positive Relationships.  
+Emotion Regulation correlated with Self-Acceptance.  
+Focus/Concentration correlated with Purpose in Life.  
+
+Correlations in the employed group followed similar patterns but were generally weaker, with fewer statistically significant associations.  
+
+**Between-group differences (Fisher z-tests)**  
+Most differences in correlation strength between students and employed participants were not statistically significant.  
+
+In a few cases, stronger correlations were observed in the student group, particularly between Emotion Regulation and Self-Acceptance.  
+
+**Interpretation**  
+- UFML subscales are positively associated with psychological well-being (SPWB) across both groups.  
+- The relationships are more pronounced in students, suggesting greater psychological reliance on social media functions.  
+- Despite variations in strength, the overall pattern of associations appears consistent across groups.  
 
 ### UFML 1 vs SPWB 1 Comparison interactive
 
@@ -326,7 +524,11 @@ ggplotly(l)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 1 vs SPWB 2 Comparison interactive
 
@@ -360,7 +562,11 @@ ggplotly(m)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 1 vs SPWB 3 Comparison interactive
 
@@ -394,7 +600,11 @@ ggplotly(n)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 1 vs SPWB 4 Comparison interactive
 
@@ -428,7 +638,11 @@ ggplotly(o)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 1 vs SPWB 5 Comparison interactive
 
@@ -462,7 +676,11 @@ ggplotly(p)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 1 vs SPWB 6 Comparison interactive
 
@@ -496,7 +714,11 @@ ggplotly(q)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 
 ### UFML 2 vs SPWB 1 Comparison interactive
@@ -531,7 +753,11 @@ ggplotly(r)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 2 vs SPWB 2 Comparison interactive
 
@@ -565,7 +791,11 @@ ggplotly(s)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 2 vs SPWB 3 Comparison interactive
 
@@ -599,7 +829,11 @@ ggplotly(t)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 2 vs SPWB 4 Comparison interactive
 
@@ -633,7 +867,11 @@ ggplotly(u)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 2 vs SPWB 5 Comparison interactive
 
@@ -667,7 +905,11 @@ ggplotly(v)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 2 vs SPWB 6 Comparison interactive
 
@@ -701,7 +943,11 @@ ggplotly(w)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 3 vs SPWB 1 Comparison interactive
 
@@ -735,7 +981,11 @@ ggplotly(x)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 3 vs SPWB 2 Comparison interactive
 
@@ -769,7 +1019,11 @@ ggplotly(y)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 3 vs SPWB 3 Comparison interactive
 
@@ -803,7 +1057,11 @@ ggplotly(z)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 3 vs SPWB 4 Comparison interactive
 
@@ -837,7 +1095,11 @@ ggplotly(aa)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 3 vs SPWB 5 Comparison interactive
 
@@ -871,7 +1133,11 @@ ggplotly(ab)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 3 vs SPWB 6 Comparison interactive
 
@@ -905,7 +1171,11 @@ ggplotly(ac)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 4 vs SPWB 1 Comparison interactive
 
@@ -939,7 +1209,11 @@ ggplotly(ad)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 4 vs SPWB 2 Comparison interactive
 
@@ -973,7 +1247,11 @@ ggplotly(ae)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 4 vs SPWB 3 Comparison interactive
 
@@ -1007,7 +1285,11 @@ ggplotly(af)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 4 vs SPWB 4 Comparison interactive
 
@@ -1041,7 +1323,11 @@ ggplotly(ag)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 4 vs SPWB 5 Comparison interactive
 
@@ -1075,7 +1361,11 @@ ggplotly(ah)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 4 vs SPWB 6 Comparison interactive
 
@@ -1109,7 +1399,11 @@ ggplotly(ag)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 5 vs SPWB 1 Comparison interactive
 
@@ -1143,7 +1437,11 @@ ggplotly(aj)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 5 vs SPWB 2 Comparison interactive
 
@@ -1177,7 +1475,11 @@ ggplotly(ak)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 5 vs SPWB 3 Comparison interactive
 
@@ -1211,7 +1513,11 @@ ggplotly(al)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 5 vs SPWB 4 Comparison interactive
 
@@ -1245,7 +1551,11 @@ ggplotly(am)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 5 vs SPWB 5 Comparison interactive
 
@@ -1279,7 +1589,11 @@ ggplotly(an)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
+
 
 ### UFML 5 vs SPWB 6 Comparison interactive
 
@@ -1313,4 +1627,7 @@ ggplotly(ao)
 
 ```
 ***
-uitleg hihi
+**Expectation**
+
+
+**Interpretation**
