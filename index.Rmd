@@ -22,6 +22,8 @@ library(dplyr)
 library(ggplot2)
 library(plotly)
 library(ggpubr)
+library(kableExtra)
+library(knitr)
 data_clean <- read_excel("UFML - 14 mei.xlsx", sheet = 2, skip = 1)
 data_filtered <- data_clean %>% 
   filter(!is.na(Q24))
@@ -309,8 +311,6 @@ wilcox.test(`Persoonlijke groei` ~ Q24, data = data_filtered)
 
 ```{r interactive-violin-i}
 
-wilcox.test(`Persoonlijke groei` ~ Q24, data = data_filtered)
-
 i <- ggplot(data_filtered, aes(x = factor(Q24), y = `Persoonlijke groei`, fill = factor(Q24))) + 
   geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
   theme_minimal() +
@@ -390,8 +390,6 @@ wilcox.test(`Doel in het leven` ~ Q24, data = data_filtered)
 
 ```{r interactive-violin-j}
 
-wilcox.test(`Doel in het leven` ~ Q24, data = data_filtered)
-
 j <- ggplot(data_filtered, aes(x = factor(Q24), y = `Doel in het leven`, fill = factor(Q24))) + 
   geom_violin(trim = TRUE, color = "black", alpha = 0.7) + 
   theme_minimal() +
@@ -461,18 +459,198 @@ Employed individuals may score higher (more life experience and self-confidence)
 
 Employed individuals feel more accepting of themselves, possibly reflecting greater life experience and stability.  
 
-### P-values according to Mann-Whitney-test
+### P-values
 
-![](C:/Users/femke/OneDrive - UvA/Jaar 3 muziekwetenschap/Scriptie/Rstudio/UFML/Plots/P_waarden.png)
+```{r p-values, include="false"}
 
-![](C:/Users/femke/OneDrive - UvA/Jaar 3 muziekwetenschap/Scriptie/Rstudio/UFML/Plots/correlatie_per_groep.png)
-![](C:/Users/femke/OneDrive - UvA/Jaar 3 muziekwetenschap/Scriptie/Rstudio/UFML/Plots/fisher_vergelijking.png)
+ufml_vars <- c("Identiteit_socialeverbinding", "Emotieregulatie", "Focus_concentratie",
+               "Achtergrond_gezelschap", "Fysiologischeopwinding")
+
+spwb_vars <- c("Autonomie", "Omgevingsbeheersing", "Persoonlijke groei",
+               "Positieve relaties", "Doel in het leven", "Zelfacceptatie")
+
+alle_vars <- c(ufml_vars, spwb_vars)
+
+data_filtered$Q24 <- factor(data_filtered$Q24, levels = c("1", "2"), labels = c("Student", "Employed"))
+
+results <- lapply(alle_vars, function(var) {
+  group1 <- data_filtered %>% filter(Q24 == "Student") %>% pull(var)
+  group2 <- data_filtered %>% filter(Q24 == "Employed") %>% pull(var)
+  
+  test <- wilcox.test(group1, group2)
+  p <- test$p.value
+  
+  sig <- case_when(
+    p < 0.001 ~ "***",
+    p < 0.01  ~ "**",
+    p < 0.05  ~ "*",
+    TRUE      ~ ""
+  )
+  
+  data.frame(Subscale = var,
+           P_value = paste0(round(p, 4), sig))
+
+})
+
+p_table <- do.call(rbind, results)
+
+print(p_table)
+
+```
+
+```{r p-values-table}
+p_table %>%
+  kable("html", caption = "Mann-Whitney U-test p-values per subscale") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE)
+```
+```{r save_p_table_png, echo=FALSE, message=FALSE, warning=FALSE}
+library(gridExtra)
+library(grid)
+
+png("p_table_output.png", width = 300, height = 400)
+grid.table(p_table)
+dev.off()
+```
 
 
 ***
 **P-values in violin plots**  
-Of the five UFML subscales, two show a significant difference between students and workers: Identity/Social Connection (p = 0.041) and Focus/Concentration (p = 0.023). Within the SPWB scales, Environmental Control (p = 0.0074) and Self-acceptance (p = 0.03) were found to be significantly different between the groups. No statistically significant difference was found for the remaining scales.  
+Of the five UFML subscales, two show a significant difference between students and workers: Identity/Social Connection (p = 0.041) and Focus/Concentration (p = 0.023). Within the SPWB scales, Environmental Control (p = 0.0074) and Self-acceptance (p = 0.03) were found to be significantly different between the groups. No statistically significant difference was found for the remaining scales. 
 
+### Spearman's rho and z-values
+
+```{r r-z-values,include="false"}
+
+data_clean$Q24 <- factor(as.numeric(data_clean$Q24),
+                         levels = c(1, 2),
+                         labels = c("Student", "Employed"))
+
+data_work <- data_clean %>% 
+  filter(!is.na(Q24))
+
+ufml_vars <- c("Identiteit_socialeverbinding", "Emotieregulatie", "Focus_concentratie",
+               "Achtergrond_gezelschap", "Fysiologischeopwinding")
+
+spwb_vars <- c("Autonomie", "Omgevingsbeheersing", "Persoonlijke groei",
+               "Positieve relaties", "Doel in het leven", "Zelfacceptatie")
+
+data_work[c(ufml_vars, spwb_vars)] <- lapply(data_work[c(ufml_vars, spwb_vars)], as.numeric)
+
+fisher_z_test <- function(r1, n1, r2, n2) {
+  z1 <- atanh(r1)
+  z2 <- atanh(r2)
+  se <- sqrt(1 / (n1 - 3) + 1 / (n2 - 3))
+  z <- (z1 - z2) / se
+  p <- 2 * (1 - pnorm(abs(z)))
+  return(c(z = z, p = p))
+}
+
+results <- list()
+
+for (ufml in ufml_vars) {
+  for (spwb in spwb_vars) {
+    
+    student <- data_work %>% filter(Q24 == "Student") %>%
+      select(all_of(c(ufml, spwb))) %>%
+      filter(complete.cases(.))
+    
+    employed <- data_work %>% filter(Q24 == "Employed") %>%
+      select(all_of(c(ufml, spwb))) %>%
+      filter(complete.cases(.))
+    
+    if (nrow(student) >= 4 & nrow(employed) >= 4 &&
+        sd(student[[ufml]]) > 0 & sd(student[[spwb]]) > 0 &&
+        sd(employed[[ufml]]) > 0 & sd(employed[[spwb]]) > 0) {
+      
+      cor_student <- cor.test(student[[ufml]], student[[spwb]], method = "spearman")
+      cor_employed <- cor.test(employed[[ufml]], employed[[spwb]], method = "spearman")
+      r1 <- as.numeric(cor_student$estimate)
+      r2 <- as.numeric(cor_employed$estimate)
+      fisher <- fisher_z_test(r1, nrow(student), r2, nrow(employed))
+      
+      results[[paste(ufml, spwb, sep = "_")]] <- data.frame(
+        UFML = ufml,
+        SPWB = spwb,
+        rho_student = round(cor_student$estimate, 3),
+        p_student = round(cor_student$p.value, 4),
+        rho_employed = round(cor_employed$estimate, 3),
+        p_employed = round(cor_employed$p.value, 4),
+        z_score = round(fisher["z"], 3),
+        p_difference = round(fisher["p"], 4)
+      )
+    } else {
+      results[[paste(ufml, spwb, sep = "_")]] <- data.frame(
+        UFML = ufml,
+        SPWB = spwb,
+        rho_student = NA,
+        p_student = NA,
+        rho_employed = NA,
+        p_employed = NA,
+        z_score = NA,
+        p_difference = NA
+      )
+    }
+  }
+}
+
+correlatie_tabel <- bind_rows(results)
+
+correlatie_tabel <- correlatie_tabel %>%
+  mutate(
+    sig_student = case_when(
+      p_student < 0.001 ~ "***",
+      p_student < 0.01 ~ "**",
+      p_student < 0.05 ~ "*",
+      TRUE ~ ""
+    ),
+    sig_employed = case_when(
+      p_employed < 0.001 ~ "***",
+      p_employed < 0.01 ~ "**",
+      p_employed < 0.05 ~ "*",
+      TRUE ~ ""
+    ),
+    rho_student_label = ifelse(!is.na(rho_student),
+                               paste0("ρ = ", round(rho_student, 2), sig_student), NA),
+    rho_employed_label = ifelse(!is.na(rho_employed),
+                                paste0("ρ = ", round(rho_employed, 2), sig_employed), NA)
+  )
+
+
+print(correlatie_tabel)
+
+```
+
+```{r correlatie_tabel_output, results='asis'}
+correlatie_tabel %>%
+  select(UFML, SPWB,
+         `Student` = rho_student_label,
+         `Employed` = rho_employed_label,
+         `Fisher z` = z_score,
+         `p (difference)` = p_difference) %>%
+  kable("html", caption = "Correlations per group with Fisher’s z-test (Spearman’s ρ)") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE)
+
+```
+
+```{r save_correlatie_png, echo=FALSE, message=FALSE, warning=FALSE}
+library(gridExtra)
+library(grid)
+
+correlatie_tabel_view <- correlatie_tabel %>%
+  select(UFML, SPWB,
+         `Student` = rho_student_label,
+         `Employed` = rho_employed_label,
+         `Fisher z` = z_score,
+         `p (difference)` = p_difference)
+
+png("correlatie_tabel.png", width = 700, height = 800)
+grid.table(correlatie_tabel_view)
+dev.off()
+```
+
+
+
+***
 **Within-group correlations**  
 Among students, several UFML subscales showed moderate to strong correlations with SPWB subscales. Notably:  
 
